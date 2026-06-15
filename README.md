@@ -128,6 +128,7 @@ Once complete, replace this section with:
 | 20 | Victim | Intentionally vulnerable target VMs | Restricted |
 | 30 | Attacker | Kali Linux | Yes |
 | 40 | Security Tools | Wazuh, Security Onion | Yes |
+| 50 | AI/Automation | Ollama, LangChain, n8n | No |
 | 99 | Isolated Sandbox | Air-gapped malware analysis | No |
 
 -->
