@@ -14,9 +14,32 @@ The most important section. Why MikroTik over other options, why this VLAN desig
 -->
 
 ## VLAN Design
-<!--
-VLAN table and explanation of each segment. Coming soon.
--->
+
+The lab is segmented into six isolated network segments. 
+Every inter-VLAN routing decision is explicit and intentional. 
+If it is not specifically permitted, it is denied. 🔒
+
+| VLAN ID | Name | Purpose | Internet Access |
+|---|---|---|---|
+| 10 | Management | Proxmox UI, switch management, 5530 access | Yes |
+| 20 | Victim | Intentionally vulnerable target VMs | Restricted |
+| 30 | Attacker | Kali Linux attacker VM | Yes |
+| 40 | Security Tools | Wazuh, Security Onion | Yes |
+| 50 | AI/Automation | Ollama, LangChain, n8n | Restricted outbound only |
+| 99 | Isolated Sandbox | Air-gapped malware analysis | No |
+
+### Inter-VLAN Routing Rules
+
+| Source VLAN | Destination VLAN | Permitted | Reason |
+|---|---|---|---|
+| 10 (Management) | All | Yes | Admin access required |
+| 20 (Victim) | 10 (Management) | No | Victim systems cannot reach management |
+| 30 (Attacker) | 20 (Victim) | Yes | Attack traffic by design |
+| 30 (Attacker) | 10 (Management) | No | Attacker VLAN treated as hostile |
+| 40 (Security Tools) | All | Yes | SIEM needs visibility across all segments |
+| 50 (AI/Automation) | 40 (Security Tools) | Yes | Agent pulls alerts from Wazuh |
+| 50 (AI/Automation) | 10 (Management) | Yes | Management access to n8n and Ollama UI |
+| 99 (Isolated Sandbox) | All | No | Fully air-gapped, no routing permitted |
 
 ## Port Map
 <!--
