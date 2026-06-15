@@ -19,6 +19,7 @@ Built to showcase. Documented to share. 🔧
 | Dell Precision 5530 | Management Workstation | Xeon E-2176M, 64GB RAM |
 | MikroTik hEX (RB750Gr3) | Lab Gateway / Firewall | 5-port gigabit, RouterOS |
 | MikroTik CSS610-8G-2S+IN | Managed Switch | 8x gigabit, 2x SFP+, SwOS, 802.1Q VLAN |
+| Dell SFF (TBD) | AI Inference Node | Specs TBD — pending hardware audit |
 | CyberPower CP1000PFCLCD | UPS | 1000VA/600W, Pure Sine Wave, AVR, 10 outlets |
 
 ---
@@ -54,7 +55,8 @@ The MikroTik hEX Firewall and CSS610 managed switch enforce VLAN separation (usi
 2. Attacker
 3. Victim
 4. Security Tooling
-5. Fully Air-Gapped Sandbox
+5. AI/Automation
+6. Fully Air-Gapped Sandbox
 
 The virtualization layer runs on a Dell Precision 7740 mobile workstation with 128GB of RAM and a dedicated Gen 4 NVMe SSD, running Proxmox. I will take snapshots before running anything in my lab, allocate resources to each VM, and have a management workstation on its own dedicated VLAN with a direct uplink to the firewall. The entire lab can be a fire on top of a dumpster fire, and the management plane stays clean. 🔥
 
@@ -89,6 +91,13 @@ VLAN segmentation, MikroTik configuration, and Proxmox installation on dedicated
 | ![Wazuh](https://img.shields.io/badge/Wazuh-SIEM-red) | Open source SIEM and EDR for log aggregation and alerting |
 | ![Security Onion](https://img.shields.io/badge/Security%20Onion-NSM-green) | Network security monitoring and intrusion detection |
 | ![Kali](https://img.shields.io/badge/Kali-Linux-557C94) | Dedicated attacker VM for lab exercises |
+
+### 🤖 AI & Automation
+| Tool | Description |
+|---|---|
+| ![Ollama](https://img.shields.io/badge/Ollama-Local%20LLM-black) | On-premises LLM inference — no data leaves the network |
+| ![LangChain](https://img.shields.io/badge/LangChain-Agentic%20AI-green) | Agentic workflow orchestration for Tier 1 alert triage and indicators of compromise (IOC) enrichment |
+| ![n8n](https://img.shields.io/badge/n8n-Workflow%20Automation-orange) | SOC playbook automation — triggers agentic workflows from Wazuh alerts |
 
 ### ☁️ Coming Soon
 | Tool | Description |
